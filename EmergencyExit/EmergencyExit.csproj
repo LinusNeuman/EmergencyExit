@@ -59,9 +59,11 @@
     <Compile Include="Art.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="ButtonManager.cs" />
+    <Compile Include="Camera.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityManager.cs" />
     <Compile Include="Fire.cs" />
+    <Compile Include="Floor.cs" />
     <Compile Include="GameRoot.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="MainMenu.cs" />

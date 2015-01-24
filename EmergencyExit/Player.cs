@@ -17,6 +17,8 @@ namespace EmergencyExit
     class Player : Entity
     {
         private float jumpTimer;
+        private bool isJumping;
+        public bool canJump;
 
         private static Player instance;
         public static Player Instance
@@ -39,11 +41,13 @@ namespace EmergencyExit
             Scale = new Vector2(1.2f, 1.2f);
 
             Position.X = GameRoot.ScreenSize.X / 5;
-            Position.Y = GameRoot.ScreenSize.Y - Art.Floor.Height -  Art.playerAnim.Height * Scale.Y;
+            Position.Y = GameRoot.ScreenSize.Y - Art.Floor.Height -  Art.playerAnim.Height * Scale.Y - 87;
 
-            frameSize = new Point(200, 232);
+            frameSize = new Point(200, 223);
             totalFrames = new Point(8, 1);
-            
+            Direction = new Vector2(1, 0);
+            Velocity = new Vector2(10, 0);
+
 
             btnMgr = new ButtonManager();
         }
@@ -55,31 +59,35 @@ namespace EmergencyExit
 
         public override void Update(GameTime gameTime)
         {
-            btnMgr.Update();
+            btnMgr.Update(gameTime);
+            
+            const float speed = 8;
 
-
-            const float speed = 16;
-            Direction = new Vector2(0, 0);
-
-            Velocity = speed * Direction;
             Position += Velocity;
-            Position = Vector2.Clamp(Position, Size / 2, GameRoot.ScreenSize - Size / 2);
+            Position = Vector2.Clamp(Position, (new Vector2(0,0) - (Size / 9)) / 2, GameRoot.ScreenSize - (Size / 9));
 
             //if (Hitbox().Intersects(
 
+            if(Velocity.Y < 10)
+            {
+                Velocity.Y += 0.6f;
+            }
+
             jumpTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (btnMgr.jumpButton.actionTrue == true)
+            if (btnMgr.jumpButton.actionTrue == true && canJump == true)
             {
                 if (jumpTimer >= 1)
                 {
                     Jump();
                     jumpTimer = 0;
                 }
+                canJump = false;
+                btnMgr.jumpButton.actionTrue = false;
             }
 
 
             currentFrame.Y = 0;
-            Fps = 5;
+            Fps = 12;
             timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             if(timer >= frameLength)
             {
@@ -91,7 +99,8 @@ namespace EmergencyExit
 
         public void Jump()
         {
-            Direction.Y = 1;
+            Position.Y -= 10f;
+            Velocity.Y = -16f;
         }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)

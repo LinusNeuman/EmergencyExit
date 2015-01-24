@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input.Touch;
 
 namespace EmergencyExit
 {
@@ -27,15 +28,27 @@ namespace EmergencyExit
 
         public void Update(GameTime gameTime)
         {
-            
+            HandleTouchInput();
+        }
+
+        private void HandleTouchInput()
+        {
+            while (TouchPanel.IsGestureAvailable)
+            {
+                GestureSample gesture = TouchPanel.ReadGesture();
+
+                if (gesture.Position.X >= 35 && gesture.Position.X <= 35 + 544
+                    && gesture.Position.Y >= 517 && gesture.Position.Y <= 517+258)
+                {
+                    GameRoot.gameState = GameRoot.GameState.Playing;
+                }
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(startScreen, new Vector2(0, 0), Color.White);
             spriteBatch.Draw(exitLayer, new Vector2(1410, 286), Color.White);
-
-
         }
 
     }

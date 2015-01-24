@@ -13,6 +13,10 @@ namespace EmergencyExit
         SpriteBatch spriteBatch;
         SpriteFont font;
 
+        Floor floor;
+
+        Camera camera;
+
         public static GameRoot Instance { get; private set; }
         public static Viewport Viewport { get { return Instance.GraphicsDevice.Viewport; } }
         public static Vector2 ScreenSize { get { return new Vector2(Viewport.Width, Viewport.Height); } }
@@ -56,6 +60,8 @@ namespace EmergencyExit
             mainMenu = new MainMenu();
             EntityManager.Add(Player.Instance);
             EntityManager.Add(Fire.Instance);
+
+            floor = new Floor();
         }
 
         /// <summary>
@@ -69,6 +75,8 @@ namespace EmergencyExit
 
             // TODO: use this.Content to load your game content here
             font = Content.Load<SpriteFont>("spriteFont1");
+
+            camera = new Camera(GraphicsDevice.Viewport);
 
             Art.Load(Content);
 
@@ -95,7 +103,10 @@ namespace EmergencyExit
                         // TODO: Add your update logic here
 
                         EntityManager.Update(gameTime);
-                        
+
+                        camera.update(Player.Instance.Position, 1920, 1080);
+
+                        floor.Update();
                     } 
                     break;
 
@@ -125,23 +136,35 @@ namespace EmergencyExit
         {
             graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
+            
             switch (gameState)
             {
                 case GameState.Playing:
                     {
+                        spriteBatch.Begin(SpriteSortMode.Deferred,
+                              BlendState.AlphaBlend,
+                              null, null, null, null,
+                              camera.Transform);
                         spriteBatch.Draw(Art.Background, Vector2.Zero, Color.White);
-                        spriteBatch.Draw(Art.Floor, new Vector2(0, ScreenSize.Y - Art.Floor.Height), Color.White);
-                        spriteBatch.DrawString(font, "Test line", new Vector2(16, 16), Color.White);
+
+                        floor.Draw(spriteBatch);
                         EntityManager.Draw(spriteBatch);
                         ButtonManager.instance.jumpButton.Draw(spriteBatch);
                         ButtonManager.instance.pauseButton.Draw(spriteBatch);
+                        spriteBatch.End();
                     }
                     break;
 
                 case GameState.MainMenu:
                     {
+                        spriteBatch.Begin();
+                        mainMenu.Draw(spriteBatch);
+                    }
+                    break;
 
+                case GameState.PauseMenu:
+                    {
+                        
                     }
                     break;
             }

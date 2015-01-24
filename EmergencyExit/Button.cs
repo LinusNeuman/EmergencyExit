@@ -20,7 +20,7 @@ namespace EmergencyExit
         public Texture2D texture;
         private Vector2 position;
 
-        public bool actionTrue { get; private set; }
+        public bool actionTrue;
 
         private int type;
 
@@ -46,15 +46,28 @@ namespace EmergencyExit
                 if(gesture.Position.X >= position.X && gesture.Position.X <= 0 + texture.Width - 30
                     && gesture.Position.Y >= position.Y && gesture.Position.Y <= GameRoot.ScreenSize.Y - 30)
                 {
-                    actionTrue = true;
+                    if (type == 1)
+                    {
+                        actionTrue = true;
+                    }
                 }
-            }
-            while (!TouchPanel.IsGestureAvailable)
-            {
-                actionTrue = false;
 
-                return;
+                if(gesture.Position.X >= position.X && gesture.Position.X <= 0 + texture.Width - 30
+                    && gesture.Position.Y >= position.Y && gesture.Position.Y <= 0 + 30 + Art.pauseButtonUp.Height)
+                {
+                    if (type == 2)
+                    {
+                        actionTrue = true;
+                    }
+                }
+
             }
+            //while (!TouchPanel.IsGestureAvailable)
+            //{
+            //    actionTrue = false;
+
+            //    return;
+            //}
 
         }
 
