@@ -64,6 +64,7 @@
     <Compile Include="Fire.cs" />
     <Compile Include="GameRoot.cs" />
     <Compile Include="Input.cs" />
+    <Compile Include="MainMenu.cs" />
     <Compile Include="Obstacle.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -82,6 +83,8 @@
     <AndroidAsset Include="Assets\Content\jumpButtonPressed.xnb" />
     <AndroidAsset Include="Assets\Content\jumpButtonUp.xnb" />
     <AndroidAsset Include="Assets\Content\pauseButtonPressed.xnb" />
+    <AndroidAsset Include="Assets\Content\Startscreen.xnb" />
+    <AndroidAsset Include="Assets\Content\ExitLayer.xnb" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>

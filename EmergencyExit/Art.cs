@@ -27,6 +27,8 @@ namespace EmergencyExit
         public static Texture2D jumpButtonPressed { get; private set; }
         public static Texture2D pauseButtonPressed { get; private set; }
         public static Texture2D playerAnim { get; private set; }
+        public static Texture2D startScreen { get; private set; }
+        public static Texture2D exitLayer { get; private set; }
 
         public static void Load(ContentManager content)
         {
@@ -41,6 +43,8 @@ namespace EmergencyExit
             jumpButtonPressed = content.Load<Texture2D>("jumpButtonPressed");
             pauseButtonPressed = content.Load<Texture2D>("pauseButtonPressed");
             playerAnim = content.Load<Texture2D>("PlayerAnim");
+            startScreen = content.Load<Texture2D>("Startscreen");
+            exitLayer = content.Load<Texture2D>("ExitLayer");
         }
     }
 }

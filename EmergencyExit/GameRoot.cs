@@ -17,6 +17,15 @@ namespace EmergencyExit
         public static Viewport Viewport { get { return Instance.GraphicsDevice.Viewport; } }
         public static Vector2 ScreenSize { get { return new Vector2(Viewport.Width, Viewport.Height); } }
 
+        public enum GameState 
+        {
+            MainMenu, 
+            PauseMenu,
+            Playing,
+        }
+        public static GameState gameState = GameState.MainMenu;
+
+        MainMenu mainMenu;
 
         public GameRoot()
         {
@@ -44,7 +53,7 @@ namespace EmergencyExit
 
             base.Initialize();
 
-
+            mainMenu = new MainMenu();
             EntityManager.Add(Player.Instance);
             EntityManager.Add(Fire.Instance);
         }
@@ -77,11 +86,33 @@ namespace EmergencyExit
                 Exit();
             }
 
-            Input.Update();
+            switch (gameState)
+            {
+                case GameState.Playing:
+                    {
+                        Input.Update();
 
-            // TODO: Add your update logic here
+                        // TODO: Add your update logic here
 
-            EntityManager.Update(gameTime);
+                        EntityManager.Update(gameTime);
+                        
+                    } 
+                    break;
+
+                case GameState.MainMenu:
+                    {
+                        mainMenu.Update(gameTime);
+                    }
+                    break;
+
+                case GameState.PauseMenu:
+                    {
+
+                    }
+                    break;
+
+            }
+
 
             base.Update(gameTime);
         }
@@ -95,12 +126,26 @@ namespace EmergencyExit
             graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-            spriteBatch.Draw(Art.Background, Vector2.Zero, Color.White);
-            spriteBatch.Draw(Art.Floor, new Vector2(0,ScreenSize.Y - Art.Floor.Height), Color.White);
-            spriteBatch.DrawString(font, "Test line", new Vector2(16, 16), Color.White);
-            EntityManager.Draw(spriteBatch);
-            ButtonManager.instance.jumpButton.Draw(spriteBatch);
-            ButtonManager.instance.pauseButton.Draw(spriteBatch);
+            switch (gameState)
+            {
+                case GameState.Playing:
+                    {
+                        spriteBatch.Draw(Art.Background, Vector2.Zero, Color.White);
+                        spriteBatch.Draw(Art.Floor, new Vector2(0, ScreenSize.Y - Art.Floor.Height), Color.White);
+                        spriteBatch.DrawString(font, "Test line", new Vector2(16, 16), Color.White);
+                        EntityManager.Draw(spriteBatch);
+                        ButtonManager.instance.jumpButton.Draw(spriteBatch);
+                        ButtonManager.instance.pauseButton.Draw(spriteBatch);
+                    }
+                    break;
+
+                case GameState.MainMenu:
+                    {
+
+                    }
+                    break;
+            }
+
             spriteBatch.End();
 
             base.Draw(gameTime);
