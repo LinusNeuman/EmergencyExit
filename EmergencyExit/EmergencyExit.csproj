@@ -66,10 +66,16 @@
     <Compile Include="Player.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="walkButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Content\spriteFont1.xnb" />
+    <AndroidAsset Include="Assets\Content\Player.xnb" />
+    <AndroidAsset Include="Assets\Content\Background.xnb" />
+    <AndroidAsset Include="Assets\Content\Door.xnb" />
+    <AndroidAsset Include="Assets\Content\Fire.xnb" />
+    <AndroidAsset Include="Assets\Content\FloorAndWall.xnb" />
+    <AndroidAsset Include="Assets\Content\jumpButton.xnb" />
+    <AndroidAsset Include="Assets\Content\Obstacle.xnb" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>

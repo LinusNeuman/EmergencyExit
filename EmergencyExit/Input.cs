@@ -21,6 +21,9 @@ namespace EmergencyExit
             
         }
 
-        public static Vector2 GetMovement
+        public static Vector2 GetMovement()
+        {
+            return Vector2.Zero;
+        }
     }
 }

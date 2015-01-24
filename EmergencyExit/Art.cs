@@ -22,7 +22,7 @@ namespace EmergencyExit
         public static Texture2D Door { get; private set; }
         public static Texture2D Obstacle { get; private set; }
         public static Texture2D FloorAndWall { get; private set; }
-        public static Texture2D walkButton { get; private set; }
+        public static Texture2D jumpButton { get; private set; }
 
         public static void Load(ContentManager content)
         {
@@ -31,8 +31,8 @@ namespace EmergencyExit
             Background = content.Load<Texture2D>("Background");
             Door = content.Load<Texture2D>("Door");
             Obstacle = content.Load<Texture2D>("Obstacle");
-            walkButton = content.Load<Texture2D>("walkButton");
-
+            FloorAndWall = content.Load<Texture2D>("FloorAndWall");
+            jumpButton = content.Load<Texture2D>("jumpButton");
         }
     }
 }

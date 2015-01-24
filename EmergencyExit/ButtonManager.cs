@@ -15,7 +15,6 @@ namespace EmergencyExit
 {
     public class ButtonManager
     {
-        public walkButton WalkButton;
         public Button jumpButton;
         public Button pauseButton;
 
@@ -23,23 +22,20 @@ namespace EmergencyExit
 
         public ButtonManager()
         {
-            WalkButton = new walkButton();
-            jumpButton = new Button();
-            pauseButton = new Button();
+            jumpButton = new Button(1);
+            pauseButton = new Button(2);
 
             instance = this;
         }
 
         public void Update()
         {
-            WalkButton.Update();
             jumpButton.Update();
             pauseButton.Update();
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            WalkButton.Draw(spriteBatch);
             jumpButton.Draw(spriteBatch);
             pauseButton.Draw(spriteBatch);
         }

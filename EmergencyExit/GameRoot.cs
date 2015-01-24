@@ -13,6 +13,11 @@ namespace EmergencyExit
         SpriteBatch spriteBatch;
         SpriteFont font;
 
+        public static GameRoot Instance { get; private set; }
+        public static Viewport Viewport { get; private set; }
+        public static Vector2 ScreenSize { get; private set; }
+
+
         public GameRoot()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -36,6 +41,9 @@ namespace EmergencyExit
             // TODO: Add your initialization logic here
 
             base.Initialize();
+
+
+            EntityManager.Add(Player.Instance);
         }
 
         /// <summary>
@@ -66,7 +74,11 @@ namespace EmergencyExit
                 Exit();
             }
 
+            Input.Update();
+
             // TODO: Add your update logic here
+
+            EntityManager.Update();
 
             base.Update(gameTime);
         }
@@ -82,6 +94,7 @@ namespace EmergencyExit
             spriteBatch.Begin(SpriteSortMode.Texture, BlendState.Additive);
             spriteBatch.Draw(Art.Background, Vector2.Zero, Color.White);
             spriteBatch.DrawString(font, "Test line", new Vector2(16, 16), Color.White);
+            EntityManager.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);

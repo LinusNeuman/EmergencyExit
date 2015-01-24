@@ -20,16 +20,35 @@ namespace EmergencyExit
         protected Texture2D texture;
         private Vector2 position;
 
-        public Button()
+        bool actionTrue;
+
+        private int type;
+
+        public Button(int Type)
         {
-            TouchPanel.EnabledGestures = GestureType.Hold | GestureType.FreeDrag;
+            TouchPanel.EnabledGestures = GestureType.Tap;
+            type = Type;
         }
 
         public void Update()
         {
-
+            HandleTouchInput(type);
         }
 
+        private void HandleTouchInput(int type)
+        {
+            while (TouchPanel.IsGestureAvailable)
+            {
+                GestureSample gesture = TouchPanel.ReadGesture();
+
+                if(gesture.Position.X >= position.X && gesture.Position.X <= texture.Width
+                    && gesture.Position.Y >= position.Y && gesture.Position.Y <= texture.Height)
+                {
+                    actionTrue = true;
+                }
+                actionTrue = false;
+            }
+        }
 
         public void Draw(SpriteBatch spriteBatch)
         {
