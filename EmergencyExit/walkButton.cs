@@ -13,14 +13,13 @@ using Microsoft.Xna.Framework;
 
 namespace EmergencyExit
 {
-    static class Input
+    public class walkButton : Button
     {
+        public Vector2 direction;
 
-        public static void Update()
+        public walkButton()
         {
-            
+            texture = Art.walkButton;
         }
-
-        public static Vector2 GetMovement
     }
 }
