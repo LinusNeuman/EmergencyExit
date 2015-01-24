@@ -61,21 +61,27 @@
     <Compile Include="ButtonManager.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityManager.cs" />
+    <Compile Include="Fire.cs" />
     <Compile Include="GameRoot.cs" />
     <Compile Include="Input.cs" />
+    <Compile Include="Obstacle.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Content\spriteFont1.xnb" />
+    <AndroidAsset Include="Assets\Content\Obstacle.xnb" />
     <AndroidAsset Include="Assets\Content\Player.xnb" />
     <AndroidAsset Include="Assets\Content\Background.xnb" />
     <AndroidAsset Include="Assets\Content\Door.xnb" />
     <AndroidAsset Include="Assets\Content\Fire.xnb" />
-    <AndroidAsset Include="Assets\Content\FloorAndWall.xnb" />
-    <AndroidAsset Include="Assets\Content\jumpButton.xnb" />
-    <AndroidAsset Include="Assets\Content\Obstacle.xnb" />
+    <AndroidAsset Include="Assets\Content\Floor.xnb" />
+    <AndroidAsset Include="Assets\Content\PlayerAnim.xnb" />
+    <AndroidAsset Include="Assets\Content\pauseButtonUp.xnb" />
+    <AndroidAsset Include="Assets\Content\jumpButtonPressed.xnb" />
+    <AndroidAsset Include="Assets\Content\jumpButtonUp.xnb" />
+    <AndroidAsset Include="Assets\Content\pauseButtonPressed.xnb" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>

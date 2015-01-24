@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace EmergencyExit
 {
@@ -30,12 +31,12 @@ namespace EmergencyExit
                 addedEntities.Add(entity);
         }
 
-        public static void Update()
+        public static void Update(GameTime gameTime)
         {
             isUpdating = true;
 
             foreach (var entity in entities)
-                entity.Update();
+                entity.Update(gameTime);
 
             isUpdating = false;
 

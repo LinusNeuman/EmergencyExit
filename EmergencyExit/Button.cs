@@ -17,17 +17,19 @@ namespace EmergencyExit
 {
     public class Button
     {
-        protected Texture2D texture;
+        public Texture2D texture;
         private Vector2 position;
 
-        bool actionTrue;
+        public bool actionTrue { get; private set; }
 
         private int type;
 
-        public Button(int Type)
+        public Button(int Type, Texture2D Texture, Vector2 Position)
         {
-            TouchPanel.EnabledGestures = GestureType.Tap;
+            TouchPanel.EnabledGestures = GestureType.Tap | GestureType.Hold | GestureType.FreeDrag;
             type = Type;
+            texture = Texture;
+            position = Position;
         }
 
         public void Update()
@@ -41,13 +43,19 @@ namespace EmergencyExit
             {
                 GestureSample gesture = TouchPanel.ReadGesture();
 
-                if(gesture.Position.X >= position.X && gesture.Position.X <= texture.Width
-                    && gesture.Position.Y >= position.Y && gesture.Position.Y <= texture.Height)
+                if(gesture.Position.X >= position.X && gesture.Position.X <= 0 + texture.Width - 30
+                    && gesture.Position.Y >= position.Y && gesture.Position.Y <= GameRoot.ScreenSize.Y - 30)
                 {
                     actionTrue = true;
                 }
-                actionTrue = false;
             }
+            while (!TouchPanel.IsGestureAvailable)
+            {
+                actionTrue = false;
+
+                return;
+            }
+
         }
 
         public void Draw(SpriteBatch spriteBatch)

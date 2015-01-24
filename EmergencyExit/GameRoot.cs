@@ -14,8 +14,8 @@ namespace EmergencyExit
         SpriteFont font;
 
         public static GameRoot Instance { get; private set; }
-        public static Viewport Viewport { get; private set; }
-        public static Vector2 ScreenSize { get; private set; }
+        public static Viewport Viewport { get { return Instance.GraphicsDevice.Viewport; } }
+        public static Vector2 ScreenSize { get { return new Vector2(Viewport.Width, Viewport.Height); } }
 
 
         public GameRoot()
@@ -28,6 +28,8 @@ namespace EmergencyExit
             graphics.PreferredBackBufferWidth = 1920;
             graphics.PreferredBackBufferHeight = 1080;
             graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft;
+
+            Instance = this;
         }
 
         /// <summary>
@@ -44,6 +46,7 @@ namespace EmergencyExit
 
 
             EntityManager.Add(Player.Instance);
+            EntityManager.Add(Fire.Instance);
         }
 
         /// <summary>
@@ -78,7 +81,7 @@ namespace EmergencyExit
 
             // TODO: Add your update logic here
 
-            EntityManager.Update();
+            EntityManager.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -91,10 +94,13 @@ namespace EmergencyExit
         {
             graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin(SpriteSortMode.Texture, BlendState.Additive);
+            spriteBatch.Begin();
             spriteBatch.Draw(Art.Background, Vector2.Zero, Color.White);
+            spriteBatch.Draw(Art.Floor, new Vector2(0,ScreenSize.Y - Art.Floor.Height), Color.White);
             spriteBatch.DrawString(font, "Test line", new Vector2(16, 16), Color.White);
             EntityManager.Draw(spriteBatch);
+            ButtonManager.instance.jumpButton.Draw(spriteBatch);
+            ButtonManager.instance.pauseButton.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
