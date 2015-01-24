@@ -7,22 +7,22 @@ namespace EmergencyExit
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class Game1 : Microsoft.Xna.Framework.Game
+    public class GameRoot : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpriteFont font;
 
-        public Game1()
+        public GameRoot()
         {
             graphics = new GraphicsDeviceManager(this);
 
             Content.RootDirectory = "Content";
 
             graphics.IsFullScreen = true;
-            graphics.PreferredBackBufferWidth = 800;
-            graphics.PreferredBackBufferHeight = 480;
-            graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft | DisplayOrientation.LandscapeRight;
+            graphics.PreferredBackBufferWidth = 1920;
+            graphics.PreferredBackBufferHeight = 1080;
+            graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft;
         }
 
         /// <summary>
@@ -49,6 +49,9 @@ namespace EmergencyExit
 
             // TODO: use this.Content to load your game content here
             font = Content.Load<SpriteFont>("spriteFont1");
+
+            Art.Load(Content);
+
         }
 
         /// <summary>
@@ -76,8 +79,9 @@ namespace EmergencyExit
         {
             graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
-            spriteBatch.DrawString(font, "Hello from MonoGame!", new Vector2(16, 16), Color.White);
+            spriteBatch.Begin(SpriteSortMode.Texture, BlendState.Additive);
+            spriteBatch.Draw(Art.Background, Vector2.Zero, Color.White);
+            spriteBatch.DrawString(font, "Test line", new Vector2(16, 16), Color.White);
             spriteBatch.End();
 
             base.Draw(gameTime);

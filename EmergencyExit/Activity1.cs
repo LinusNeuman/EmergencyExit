@@ -17,8 +17,8 @@ namespace EmergencyExit
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            Game1.Activity = this;
-            var g = new Game1();
+            GameRoot.Activity = this;
+            var g = new GameRoot();
             SetContentView(g.Window);
             g.Run();
         }

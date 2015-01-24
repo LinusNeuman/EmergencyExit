@@ -56,7 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activity1.cs" />
-    <Compile Include="Game1.cs" />
+    <Compile Include="Art.cs" />
+    <Compile Include="Entity.cs" />
+    <Compile Include="EntityManager.cs" />
+    <Compile Include="GameRoot.cs" />
+    <Compile Include="Input.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
