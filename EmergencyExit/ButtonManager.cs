@@ -26,7 +26,7 @@ namespace EmergencyExit
         public ButtonManager()
         {
             jumpButton = new Button(1, Art.jumpButtonUp, new Vector2(0 + 30, GameRoot.ScreenSize.Y - Art.jumpButtonUp.Height - 30));
-            pauseButton = new Button(2, Art.pauseButtonUp, new Vector2(0 + 30,0 + 30));
+            pauseButton = new Button(3, Art.pauseButtonUp, new Vector2(0 + 30,0 + 30));
 
             instance = this;
         }
@@ -40,7 +40,7 @@ namespace EmergencyExit
             timer1 += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             timer2 += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
-            if (jumpButton.actionTrue == true && jumpButton.texture != Art.jumpButtonPressed)
+            if (jumpButton.actionTrue == true && Player.Instance.isOnGround == true)
             {
                 timer1 = 0;
                 jumpButton.texture = Art.jumpButtonPressed;
@@ -53,7 +53,7 @@ namespace EmergencyExit
                     jumpButton.texture = Art.jumpButtonUp;
                 }
             }
-            if (pauseButton.actionTrue == true && pauseButton.texture != Art.pauseButtonPressed)
+            if (pauseButton.actionTrue == true)
             {
                 timer2 = 0;
                 pauseButton.texture = Art.pauseButtonPressed;

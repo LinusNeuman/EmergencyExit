@@ -17,6 +17,7 @@ namespace EmergencyExit
     public class Floor
     {
         Texture2D texture;
+        
         Vector2 Position;
 
 
@@ -33,10 +34,23 @@ namespace EmergencyExit
 
         public void Update()
         {
-            if(Hitbox().Intersects(Player.Instance.Hitbox()))
+            Position.X = -GameRoot.ScreenSize.X / 3 + Player.Instance.Position.X + (Player.Instance.image.Width / Player.Instance.totalFrames.X / 3);
+
+            //if(Hitbox().Intersects(Player.Instance.Hitbox()))
+            //{
+            //    Player.Instance.Velocity.Y = 0f;
+            //    Player.Instance.canJump = true;
+            //}
+
+            if(Player.Instance.Position.Y + Art.playerAnim.Height >= GameRoot.ScreenSize.Y - texture.Height)
             {
                 Player.Instance.Velocity.Y = 0f;
                 Player.Instance.canJump = true;
+                Player.Instance.isOnGround = true;
+            }
+            if (Player.Instance.Position.Y + Art.playerAnim.Height <= GameRoot.ScreenSize.Y - texture.Height)
+            {
+                Player.Instance.isOnGround = false;
             }
         }
 

@@ -17,8 +17,10 @@ namespace EmergencyExit
     class Player : Entity
     {
         private float jumpTimer;
-        private bool isJumping;
+        public bool isJumping;
         public bool canJump;
+
+        public bool isOnGround;
 
         private static Player instance;
         public static Player Instance
@@ -43,7 +45,7 @@ namespace EmergencyExit
             Position.X = GameRoot.ScreenSize.X / 5;
             Position.Y = GameRoot.ScreenSize.Y - Art.Floor.Height -  Art.playerAnim.Height * Scale.Y - 87;
 
-            frameSize = new Point(200, 223);
+            //frameSize = new Point(((int)(200 * Scale.X)), ((int)(223 * Scale.Y)));
             totalFrames = new Point(8, 1);
             Direction = new Vector2(1, 0);
             Velocity = new Vector2(10, 0);
@@ -54,12 +56,27 @@ namespace EmergencyExit
 
         public Rectangle Hitbox()
         {
-            return new Rectangle((int)Position.X, (int)Position.Y, (frameSize.X), (frameSize.Y));
+            return new Rectangle((int)Position.X, (int)Position.Y, (int)(frameSize.X * (Scale.X)), (int)(frameSize.Y * Scale.Y));
         }
 
         public override void Update(GameTime gameTime)
         {
             btnMgr.Update(gameTime);
+
+            if(isJumping)
+            {
+                image = Art.playerAnimJump;
+                totalFrames = new Point(8,1);
+                frameSize = new Point(1, 1);
+                Scale = new Vector2(2.21f, 2.21f);
+            }
+            if(isOnGround)
+            {
+                image = Art.playerAnim;
+                totalFrames = new Point(7, 1);
+                frameSize = new Point(200,223);
+                Scale = new Vector2(1.2f, 1.2f);
+            }
             
             const float speed = 8;
 

@@ -30,22 +30,11 @@ namespace EmergencyExit
             viewport = newViewport;
         }
 
-        public void update(Vector2 position, int xOffset, int yOffset)
+        public void Update(GameTime gameTime)
         {
-            if (position.X < viewport.Width / 2)
-                centre.X = viewport.Width / 2;
-            else if (position.X > xOffset - (viewport.Width / 2))
-                centre.X = xOffset - (viewport.Width / 2);
-            else centre.X = position.X;
-
-            if (position.Y < viewport.Height / 2)
-                centre.Y = viewport.Height / 2;
-            else if (position.Y > yOffset - (viewport.Height / 2))
-                centre.Y = yOffset - (viewport.Height / 2);
-            else centre.Y = position.Y;
-
-            transform = Matrix.CreateTranslation(new Vector3(-centre.X + (viewport.Width / 2),
-                                                             -centre.Y + (viewport.Height / 2), 0));
+            centre = new Vector2(Player.Instance.Position.X + ((Player.Instance.image.Width / Player.Instance.totalFrames.X) / 3) - GameRoot.ScreenSize.X / 3, 0);
+            transform = Matrix.CreateScale(new Vector3(1,1,0)) * 
+                Matrix.CreateTranslation(new Vector3(-centre.X,-centre.Y,0));
         }
     }
 }

@@ -56,6 +56,7 @@ namespace EmergencyExit
             // TODO: Add your initialization logic here
 
             base.Initialize();
+            camera = new Camera(GraphicsDevice.Viewport);
 
             mainMenu = new MainMenu();
             EntityManager.Add(Player.Instance);
@@ -76,7 +77,7 @@ namespace EmergencyExit
             // TODO: use this.Content to load your game content here
             font = Content.Load<SpriteFont>("spriteFont1");
 
-            camera = new Camera(GraphicsDevice.Viewport);
+
 
             Art.Load(Content);
 
@@ -104,7 +105,7 @@ namespace EmergencyExit
 
                         EntityManager.Update(gameTime);
 
-                        camera.update(Player.Instance.Position, 1920, 1080);
+                        camera.Update(gameTime);
 
                         floor.Update();
                     } 
@@ -145,7 +146,7 @@ namespace EmergencyExit
                               BlendState.AlphaBlend,
                               null, null, null, null,
                               camera.Transform);
-                        spriteBatch.Draw(Art.Background, Vector2.Zero, Color.White);
+                        spriteBatch.Draw(Art.Background, new Vector2(-ScreenSize.X / 3 + Player.Instance.Position.X + (Player.Instance.image.Width / Player.Instance.totalFrames.X / 3), 0), Color.White);
 
                         floor.Draw(spriteBatch);
                         EntityManager.Draw(spriteBatch);

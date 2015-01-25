@@ -35,7 +35,7 @@ namespace EmergencyExit
 
             Scale = new Vector2(1, 1);
 
-            Position.X = 0 - Art.Fire.Width / 2; //* Scale.X;
+            Position.X = 0 - Art.Fire.Width / 2 -GameRoot.ScreenSize.X / 3 + Player.Instance.Position.X + (Player.Instance.image.Width / Player.Instance.totalFrames.X / 3); //* Scale.X;
             Position.Y = 0;
         }
 
@@ -44,7 +44,7 @@ namespace EmergencyExit
             const float speed = 16;
             Direction = new Vector2(0, 0);
 
-            Velocity = speed * Direction;
+            Velocity = new Vector2(12, 0);
             Position += Velocity;
         }
 

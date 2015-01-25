@@ -18,7 +18,7 @@ namespace EmergencyExit
     {
         protected Vector2 Direction;
 
-        protected Texture2D image;
+        public Texture2D image;
 
         protected Color color = Color.White;
 

@@ -26,7 +26,7 @@ namespace EmergencyExit
 
         public Button(int Type, Texture2D Texture, Vector2 Position)
         {
-            TouchPanel.EnabledGestures = GestureType.Tap | GestureType.Hold | GestureType.FreeDrag;
+            TouchPanel.EnabledGestures = GestureType.Tap;
             type = Type;
             texture = Texture;
             position = Position;
@@ -43,23 +43,29 @@ namespace EmergencyExit
             {
                 GestureSample gesture = TouchPanel.ReadGesture();
 
-                if(gesture.Position.X >= position.X && gesture.Position.X <= 0 + texture.Width - 30
-                    && gesture.Position.Y >= position.Y && gesture.Position.Y <= GameRoot.ScreenSize.Y - 30)
+                if (type == 2)
                 {
-                    if (type == 1)
+                    if (gesture.Position.X >= position.X && gesture.Position.X <= 0 + texture.Width + 30
+                        && gesture.Position.Y >= position.Y && gesture.Position.Y <= 0 + 30 + Art.pauseButtonUp.Height)
                     {
+
+
+                        actionTrue = true;
+
+                    }
+                }
+
+                if (type == 1)
+                {
+                    if (gesture.Position.X >= position.X && gesture.Position.X <= 0 + texture.Width + 30
+                        && gesture.Position.Y >= position.Y && gesture.Position.Y <= GameRoot.ScreenSize.Y - 30)
+                    {
+
                         actionTrue = true;
                     }
                 }
 
-                if(gesture.Position.X >= position.X && gesture.Position.X <= 0 + texture.Width - 30
-                    && gesture.Position.Y >= position.Y && gesture.Position.Y <= 0 + 30 + Art.pauseButtonUp.Height)
-                {
-                    if (type == 2)
-                    {
-                        actionTrue = true;
-                    }
-                }
+                
 
             }
             //while (!TouchPanel.IsGestureAvailable)
