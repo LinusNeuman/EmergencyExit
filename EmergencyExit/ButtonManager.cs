@@ -16,8 +16,8 @@ namespace EmergencyExit
 {
     public class ButtonManager
     {
-        public Button jumpButton;
-        public Button pauseButton;
+        public jumpButton jumpButton;
+        public pauseButton pauseButton;
 
         private float timer1, timer2;
 
@@ -25,19 +25,19 @@ namespace EmergencyExit
 
         public ButtonManager()
         {
-            jumpButton = new Button(1, Art.jumpButtonUp, new Vector2(0 + 30, GameRoot.ScreenSize.Y - Art.jumpButtonUp.Height - 30));
-            pauseButton = new Button(3, Art.pauseButtonUp, new Vector2(0 + 30,0 + 30));
+            jumpButton = new jumpButton(Art.jumpButtonUp, new Vector2(0 + 30, GameRoot.ScreenSize.Y - Art.jumpButtonUp.Height - 30));
+            pauseButton = new pauseButton(Art.pauseButtonUp, new Vector2(0 + 30,0 + 30));
 
             instance = this;
         }
 
         public void Update(GameTime gameTime)
         {
-            jumpButton.position.X = 0 + 30 -GameRoot.ScreenSize.X / 3 + Player.Instance.Position.X + (Player.Instance.image.Width / Player.Instance.totalFrames.X / 3);
 
 
-            jumpButton.Update();
-            pauseButton.Update();
+            jumpButton.Update(gameTime);
+            pauseButton.Update(gameTime);
+            
 
             timer1 += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             timer2 += (float)gameTime.ElapsedGameTime.TotalMilliseconds;

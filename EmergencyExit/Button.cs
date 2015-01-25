@@ -15,66 +15,39 @@ using Microsoft.Xna.Framework.Input.Touch;
 
 namespace EmergencyExit
 {
-    public class Button
+    public class pauseButton
     {
         public Texture2D texture;
         public Vector2 position;
 
         public bool actionTrue;
 
-        private int type;
 
-        public Button(int Type, Texture2D Texture, Vector2 Position)
+        public pauseButton(Texture2D Texture, Vector2 Position)
         {
             TouchPanel.EnabledGestures = GestureType.Tap;
-            type = Type;
             texture = Texture;
             position = Position;
         }
 
-        public void Update()
-        {
-            HandleTouchInput(type);
-        }
-
-        private void HandleTouchInput(int type)
+        public void Update(GameTime gameTime)
         {
             while (TouchPanel.IsGestureAvailable)
             {
                 GestureSample gesture = TouchPanel.ReadGesture();
 
-                if (type == 2)
+                if (gesture.Position.X >= position.X && gesture.Position.X <= 0 + texture.Width + 30
+                    && gesture.Position.Y >= position.Y && gesture.Position.Y <= 0 + 30 + Art.pauseButtonUp.Height)
                 {
-                    if (gesture.Position.X >= position.X && gesture.Position.X <= 0 + texture.Width + 30
-                        && gesture.Position.Y >= position.Y && gesture.Position.Y <= 0 + 30 + Art.pauseButtonUp.Height)
-                    {
 
 
-                        actionTrue = true;
+                    actionTrue = true;
 
-                    }
                 }
 
-                if (type == 1)
-                {
-                    if (gesture.Position.X >= position.X && gesture.Position.X <= 0 + texture.Width + 30
-                        && gesture.Position.Y >= position.Y && gesture.Position.Y <= GameRoot.ScreenSize.Y - 30)
-                    {
 
-                        actionTrue = true;
-                    }
-                }
-
-                
 
             }
-            //while (!TouchPanel.IsGestureAvailable)
-            //{
-            //    actionTrue = false;
-
-            //    return;
-            //}
-
         }
 
         public void Draw(SpriteBatch spriteBatch)

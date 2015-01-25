@@ -11,9 +11,12 @@ namespace EmergencyExit
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        SpriteFont font;
+        public SpriteFont font;
+
 
         Floor floor;
+
+        PauseMenu pauseMenu;
 
         Camera camera;
 
@@ -26,6 +29,9 @@ namespace EmergencyExit
             MainMenu, 
             PauseMenu,
             Playing,
+            GameOver,
+            LevelDone,
+            About,
         }
         public static GameState gameState = GameState.MainMenu;
 
@@ -59,6 +65,7 @@ namespace EmergencyExit
             camera = new Camera(GraphicsDevice.Viewport);
 
             mainMenu = new MainMenu();
+            pauseMenu = new PauseMenu();
             EntityManager.Add(Player.Instance);
             EntityManager.Add(Fire.Instance);
 
@@ -119,7 +126,7 @@ namespace EmergencyExit
 
                 case GameState.PauseMenu:
                     {
-
+                        pauseMenu.Update();
                     }
                     break;
 
@@ -142,16 +149,14 @@ namespace EmergencyExit
             {
                 case GameState.Playing:
                     {
-                        spriteBatch.Begin(SpriteSortMode.Deferred,
-                              BlendState.AlphaBlend,
-                              null, null, null, null,
-                              camera.Transform);
-                        spriteBatch.Draw(Art.Background, new Vector2(-ScreenSize.X / 3 + Player.Instance.Position.X + (Player.Instance.image.Width / Player.Instance.totalFrames.X / 3), 0), Color.White);
+                        spriteBatch.Begin();
+                        spriteBatch.Draw(Art.Background, new Vector2(0, 0), Color.White);
 
                         floor.Draw(spriteBatch);
                         EntityManager.Draw(spriteBatch);
                         ButtonManager.instance.jumpButton.Draw(spriteBatch);
                         ButtonManager.instance.pauseButton.Draw(spriteBatch);
+                        //spriteBatch.DrawString(font, "EAFKQEF: " + ButtonManager.instance.pauseButton.type.ToString(), new Vector2(500, 500), Color.White);
                         spriteBatch.End();
                     }
                     break;
@@ -160,12 +165,20 @@ namespace EmergencyExit
                     {
                         spriteBatch.Begin();
                         mainMenu.Draw(spriteBatch);
+                        spriteBatch.End();
                     }
                     break;
 
                 case GameState.PauseMenu:
                     {
-                        
+                        spriteBatch.Begin();
+                        spriteBatch.Draw(Art.Background, new Vector2(0, 0), Color.White);
+
+                        floor.Draw(spriteBatch);
+                        EntityManager.Draw(spriteBatch);
+                        ButtonManager.instance.jumpButton.Draw(spriteBatch);
+                        ButtonManager.instance.pauseButton.Draw(spriteBatch);
+                        pauseMenu.Draw(spriteBatch);
                     }
                     break;
             }

@@ -42,13 +42,13 @@ namespace EmergencyExit
 
             Scale = new Vector2(1.2f, 1.2f);
 
-            Position.X = GameRoot.ScreenSize.X / 5;
+            Position.X = GameRoot.ScreenSize.X / 4;
             Position.Y = GameRoot.ScreenSize.Y - Art.Floor.Height -  Art.playerAnim.Height * Scale.Y - 87;
 
             //frameSize = new Point(((int)(200 * Scale.X)), ((int)(223 * Scale.Y)));
             totalFrames = new Point(8, 1);
             Direction = new Vector2(1, 0);
-            Velocity = new Vector2(5, 0);
+            Velocity = new Vector2(0, 0);
 
 
             btnMgr = new ButtonManager();

@@ -66,8 +66,10 @@
     <Compile Include="Floor.cs" />
     <Compile Include="GameRoot.cs" />
     <Compile Include="Input.cs" />
+    <Compile Include="jumpButton.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="Obstacle.cs" />
+    <Compile Include="PauseMenu.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,7 +90,11 @@
     <AndroidAsset Include="Assets\Content\Startscreen.xnb" />
     <AndroidAsset Include="Assets\Content\ExitLayer.xnb" />
     <AndroidAsset Include="Assets\Content\PlayerAnimJump.xnb" />
-    <AndroidAsset Include="Assets\Content\ExitLayer2.xnb" />
+    <AndroidAsset Include="Assets\Content\GreenExitLayer.xnb" />
+    <AndroidAsset Include="Assets\Content\ResumeButton.xnb" />
+    <AndroidAsset Include="Assets\Content\AboutButton.xnb" />
+    <AndroidAsset Include="Assets\Content\QuitButton.xnb" />
+    <AndroidAsset Include="Assets\Content\PauseMenu.xnb" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>

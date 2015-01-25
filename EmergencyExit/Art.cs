@@ -31,6 +31,10 @@ namespace EmergencyExit
         public static Texture2D exitLayer { get; private set; }
         public static Texture2D playerAnimJump { get; private set; }
         public static Texture2D exitLayer2 { get; private set; }
+        public static Texture2D AboutButton { get; private set; }
+        public static Texture2D ResumeButton { get; private set; }
+        public static Texture2D QuitButton { get; private set; }
+        public static Texture2D PauseMenu { get; private set; }
 
         public static void Load(ContentManager content)
         {
@@ -48,7 +52,11 @@ namespace EmergencyExit
             startScreen = content.Load<Texture2D>("Startscreen");
             exitLayer = content.Load<Texture2D>("ExitLayer");
             playerAnimJump = content.Load<Texture2D>("PlayerAnimJump");
-            exitLayer2 = content.Load<Texture2D>("ExitLayer2");
+            exitLayer2 = content.Load<Texture2D>("GreenExitLayer");
+            AboutButton = content.Load<Texture2D>("AboutButton");
+            ResumeButton = content.Load<Texture2D>("ResumeButton");
+            QuitButton = content.Load<Texture2D>("QuitButton");
+            PauseMenu = content.Load<Texture2D>("PauseMenu");
         }
     }
 }
