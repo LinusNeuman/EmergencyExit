@@ -41,10 +41,12 @@ namespace EmergencyExit
 
         public override void Update(GameTime gameTime)
         {
+            Position = Vector2.Clamp(Position, new Vector2(((0 -GameRoot.ScreenSize.X / 3 + Player.Instance.Position.X + (Player.Instance.image.Width / Player.Instance.totalFrames.X / 3))),0), new Vector2(100,0));
+
             const float speed = 16;
             Direction = new Vector2(0, 0);
 
-            Velocity = new Vector2(12, 0);
+            Velocity = new Vector2(5, 0);
             Position += Velocity;
         }
 

@@ -48,7 +48,7 @@ namespace EmergencyExit
             //frameSize = new Point(((int)(200 * Scale.X)), ((int)(223 * Scale.Y)));
             totalFrames = new Point(8, 1);
             Direction = new Vector2(1, 0);
-            Velocity = new Vector2(10, 0);
+            Velocity = new Vector2(5, 0);
 
 
             btnMgr = new ButtonManager();
@@ -81,7 +81,7 @@ namespace EmergencyExit
             const float speed = 8;
 
             Position += Velocity;
-            Position = Vector2.Clamp(Position, (new Vector2(0,0) - (Size / 9)) / 2, GameRoot.ScreenSize - (Size / 9));
+            //Position = Vector2.Clamp(Position, (new Vector2(0,0) - (Size / 9)) / 2, GameRoot.ScreenSize - (Size / 9));
 
             //if (Hitbox().Intersects(
 
