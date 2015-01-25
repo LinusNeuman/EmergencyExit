@@ -19,11 +19,13 @@ namespace EmergencyExit
     {
         private Texture2D startScreen;
         private Texture2D exitLayer;
+        private Texture2D exitLayer2;
 
         public MainMenu()
         {
             startScreen = Art.startScreen;
             exitLayer = Art.exitLayer;
+            exitLayer2 = Art.exitLayer2;
         }
 
         public void Update(GameTime gameTime)
@@ -37,8 +39,8 @@ namespace EmergencyExit
             {
                 GestureSample gesture = TouchPanel.ReadGesture();
 
-                if (gesture.Position.X >= 35 && gesture.Position.X <= 35 + 544
-                    && gesture.Position.Y >= 517 && gesture.Position.Y <= 517+258)
+                if (gesture.Position.X >= 1500 && gesture.Position.X <= 1500+238
+                    && gesture.Position.Y >= 427 && gesture.Position.Y <= 427+128)
                 {
                     GameRoot.gameState = GameRoot.GameState.Playing;
                 }
@@ -48,7 +50,8 @@ namespace EmergencyExit
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(startScreen, new Vector2(0, 0), Color.White);
-            spriteBatch.Draw(exitLayer, new Vector2(1410, 286), Color.White);
+            spriteBatch.Draw(exitLayer, new Vector2(1618, 512), Color.White);
+            spriteBatch.Draw(exitLayer2, new Vector2(1721, 511), Color.White);
         }
 
     }

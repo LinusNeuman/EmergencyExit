@@ -33,6 +33,8 @@ namespace EmergencyExit
 
         public void Update(GameTime gameTime)
         {
+            jumpButton.position.X = 0 + 30 -GameRoot.ScreenSize.X / 3 + Player.Instance.Position.X + (Player.Instance.image.Width / Player.Instance.totalFrames.X / 3);
+
 
             jumpButton.Update();
             pauseButton.Update();

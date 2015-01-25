@@ -18,7 +18,7 @@ namespace EmergencyExit
     public class Button
     {
         public Texture2D texture;
-        private Vector2 position;
+        public Vector2 position;
 
         public bool actionTrue;
 
