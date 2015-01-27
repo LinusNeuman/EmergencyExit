@@ -35,6 +35,9 @@ namespace EmergencyExit
         public static Texture2D ResumeButton { get; private set; }
         public static Texture2D QuitButton { get; private set; }
         public static Texture2D PauseMenu { get; private set; }
+        public static Texture2D About { get; private set; }
+        public static Texture2D GameOver { get; private set; }
+        public static Texture2D GameOverButton { get; private set; }
 
         public static void Load(ContentManager content)
         {
@@ -57,6 +60,9 @@ namespace EmergencyExit
             ResumeButton = content.Load<Texture2D>("ResumeButton");
             QuitButton = content.Load<Texture2D>("QuitButton");
             PauseMenu = content.Load<Texture2D>("PauseMenu");
+            About = content.Load<Texture2D>("About");
+            GameOver = content.Load<Texture2D>("GameOver");
+            GameOverButton = content.Load<Texture2D>("GameOverButton");
         }
     }
 }

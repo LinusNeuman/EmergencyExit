@@ -13,12 +13,16 @@ namespace EmergencyExit
         SpriteBatch spriteBatch;
         public SpriteFont font;
 
+        Matrix SpriteScale;
+
+        public ObstacleManager obMgr;
 
         Floor floor;
 
+        GameOver gameOver;
         PauseMenu pauseMenu;
+        About about;
 
-        Camera camera;
 
         public static GameRoot Instance { get; private set; }
         public static Viewport Viewport { get { return Instance.GraphicsDevice.Viewport; } }
@@ -44,8 +48,6 @@ namespace EmergencyExit
             Content.RootDirectory = "Content";
 
             graphics.IsFullScreen = true;
-            graphics.PreferredBackBufferWidth = 1920;
-            graphics.PreferredBackBufferHeight = 1080;
             graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft;
 
             Instance = this;
@@ -62,14 +64,23 @@ namespace EmergencyExit
             // TODO: Add your initialization logic here
 
             base.Initialize();
-            camera = new Camera(GraphicsDevice.Viewport);
 
+            about = new About();
+            gameOver = new GameOver();
             mainMenu = new MainMenu();
             pauseMenu = new PauseMenu();
             EntityManager.Add(Player.Instance);
             EntityManager.Add(Fire.Instance);
 
+            obMgr = new ObstacleManager();
+
             floor = new Floor();
+
+            float screenscaleX =
+                (((float)graphics.PreferredBackBufferWidth / 1920)); 
+            float screenscaleY =
+                (((float)graphics.PreferredBackBufferHeight / 1080));
+            SpriteScale = Matrix.CreateScale(screenscaleX, screenscaleY, 1);
         }
 
         /// <summary>
@@ -95,12 +106,19 @@ namespace EmergencyExit
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        /// 
+        public static void ResetGame()
+        {
+            EntityManager.entities.Clear();
+            EntityManager.addedEntities.Clear();
+   
+            EntityManager.Add(Player.Instance);
+            EntityManager.Add(Fire.Instance);
+        }
+
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-            {
-                Exit();
-            }
+            
 
             switch (gameState)
             {
@@ -111,8 +129,7 @@ namespace EmergencyExit
                         // TODO: Add your update logic here
 
                         EntityManager.Update(gameTime);
-
-                        camera.Update(gameTime);
+                        obMgr.Update(gameTime);
 
                         floor.Update();
                     } 
@@ -124,9 +141,21 @@ namespace EmergencyExit
                     }
                     break;
 
+                case GameState.GameOver:
+                    {
+                         gameOver.Update();
+                    }
+                    break;
+
                 case GameState.PauseMenu:
                     {
                         pauseMenu.Update();
+                    }
+                    break;
+
+                case GameState.About:
+                    {
+                        about.Update();
                     }
                     break;
 
@@ -144,12 +173,14 @@ namespace EmergencyExit
         {
             graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            
+            spriteBatch.Begin(0, // to use the scaling depending on the resolution
+                                 null, null,
+                                 null, null,
+                                 null, SpriteScale);
             switch (gameState)
             {
                 case GameState.Playing:
                     {
-                        spriteBatch.Begin();
                         spriteBatch.Draw(Art.Background, new Vector2(0, 0), Color.White);
 
                         floor.Draw(spriteBatch);
@@ -157,21 +188,29 @@ namespace EmergencyExit
                         ButtonManager.instance.jumpButton.Draw(spriteBatch);
                         ButtonManager.instance.pauseButton.Draw(spriteBatch);
                         //spriteBatch.DrawString(font, "EAFKQEF: " + ButtonManager.instance.pauseButton.type.ToString(), new Vector2(500, 500), Color.White);
-                        spriteBatch.End();
                     }
                     break;
 
                 case GameState.MainMenu:
                     {
-                        spriteBatch.Begin();
                         mainMenu.Draw(spriteBatch);
-                        spriteBatch.End();
+                    }
+                    break;
+
+                case GameState.GameOver:
+                    {
+                        spriteBatch.Draw(Art.Background, new Vector2(0, 0), Color.White);
+
+                        floor.Draw(spriteBatch);
+                        EntityManager.Draw(spriteBatch);
+                        ButtonManager.instance.jumpButton.Draw(spriteBatch);
+                        ButtonManager.instance.pauseButton.Draw(spriteBatch);
+                        gameOver.Draw(spriteBatch);
                     }
                     break;
 
                 case GameState.PauseMenu:
                     {
-                        spriteBatch.Begin();
                         spriteBatch.Draw(Art.Background, new Vector2(0, 0), Color.White);
 
                         floor.Draw(spriteBatch);
@@ -179,6 +218,18 @@ namespace EmergencyExit
                         ButtonManager.instance.jumpButton.Draw(spriteBatch);
                         ButtonManager.instance.pauseButton.Draw(spriteBatch);
                         pauseMenu.Draw(spriteBatch);
+                    }
+                    break;
+
+                case GameState.About:
+                    {
+                        spriteBatch.Draw(Art.Background, new Vector2(0, 0), Color.White);
+
+                        floor.Draw(spriteBatch);
+                        EntityManager.Draw(spriteBatch);
+                        ButtonManager.instance.jumpButton.Draw(spriteBatch);
+                        ButtonManager.instance.pauseButton.Draw(spriteBatch);
+                        about.Draw(spriteBatch);
                     }
                     break;
             }

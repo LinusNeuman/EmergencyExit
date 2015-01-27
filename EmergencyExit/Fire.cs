@@ -29,6 +29,11 @@ namespace EmergencyExit
             }
         }
 
+        public Rectangle Hitbox()
+        {
+            return new Rectangle((int)Position.X, (int)Position.Y, image.Width-200, image.Height);
+        }
+
         private Fire()
         {
             image = Art.Fire;
@@ -45,7 +50,7 @@ namespace EmergencyExit
             const float speed = 16;
             Direction = new Vector2(0, 0);
 
-            Velocity = new Vector2(0.05f, 0);
+            Velocity = new Vector2(0f, 0);
             Position += Velocity;
         }
 

@@ -16,10 +16,10 @@ namespace EmergencyExit
 {
     static class EntityManager
     {
-        static List<Entity> entities = new List<Entity>();
+        static public List<Entity> entities = new List<Entity>();
 
         static bool isUpdating;
-        static List<Entity> addedEntities = new List<Entity>();
+        static public List<Entity> addedEntities = new List<Entity>();
 
         public static int Count { get { return entities.Count; } }
 

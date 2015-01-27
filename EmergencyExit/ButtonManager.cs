@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input.Touch;
 
 namespace EmergencyExit
 {
@@ -25,8 +26,8 @@ namespace EmergencyExit
 
         public ButtonManager()
         {
-            jumpButton = new jumpButton(Art.jumpButtonUp, new Vector2(0 + 30, GameRoot.ScreenSize.Y - Art.jumpButtonUp.Height - 30));
-            pauseButton = new pauseButton(Art.pauseButtonUp, new Vector2(0 + 30,0 + 30));
+            jumpButton = new jumpButton();
+            pauseButton = new pauseButton();
 
             instance = this;
         }
@@ -35,38 +36,52 @@ namespace EmergencyExit
         {
 
 
-            jumpButton.Update(gameTime);
-            pauseButton.Update(gameTime);
+            //jumpButton.Update(gameTime);
+            //pauseButton.Update(gameTime);
+
+            while (TouchPanel.IsGestureAvailable)
+            {
+                GestureSample gesture = TouchPanel.ReadGesture();
+
+                if (gesture.Position.X >= jumpButton.position.X && gesture.Position.X <= 0 + jumpButton.texture.Width + 30
+                    && gesture.Position.Y >= jumpButton.position.Y && gesture.Position.Y <= GameRoot.ScreenSize.Y - 30)
+                {
+
+                    jumpButton.actionjumpTrue = true;
+                }
+                if (gesture.Position.X >= pauseButton.position.X && gesture.Position.X <= 0 + pauseButton.texture.Width + 30
+                    && gesture.Position.Y >= pauseButton.position.Y && gesture.Position.Y <= GameRoot.ScreenSize.Y - 30)
+                {
+
+                    pauseButton.actionpauseTrue = true;
+                }
+
+
+
+            }
             
 
             timer1 += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            timer2 += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
-            if (jumpButton.actionTrue == true && Player.Instance.isOnGround == true)
+            if (jumpButton.actionjumpTrue == true && Player.Instance.isOnGround == true)
             {
                 timer1 = 0;
                 jumpButton.texture = Art.jumpButtonPressed;
                 Player.Instance.Jump();
+                jumpButton.actionjumpTrue = false;
             }
-            if (jumpButton.actionTrue == false)
+            if (jumpButton.actionjumpTrue == false)
             {
                 if (timer1 >= 100)
                 {
                     jumpButton.texture = Art.jumpButtonUp;
                 }
             }
-            if (pauseButton.actionTrue == true)
+            if (pauseButton.actionpauseTrue == true)
             {
-                timer2 = 0;
                 pauseButton.texture = Art.pauseButtonPressed;
                 GameRoot.gameState = GameRoot.GameState.PauseMenu;
-            }
-            if (pauseButton.actionTrue == false)
-            {
-                if (timer2 >= 100)
-                {
-                    pauseButton.texture = Art.pauseButtonUp;
-                }
+                pauseButton.actionpauseTrue = false;
             }
 
             

@@ -20,17 +20,18 @@ namespace EmergencyExit
         public Texture2D texture;
         public Vector2 position;
 
-        public bool actionTrue;
+        public bool actionjumpTrue;
 
-        public jumpButton(Texture2D Texture, Vector2 Position)
+        public jumpButton()
         {
             TouchPanel.EnabledGestures = GestureType.Tap;
-            texture = Texture;
-            position = Position;
+            texture = Art.jumpButtonUp;
+            position = new Vector2(0 + 30, GameRoot.ScreenSize.Y - Art.jumpButtonUp.Height - 30);
         }
 
         public void Update(GameTime gameTime)
         {
+            TouchPanel.EnabledGestures = GestureType.Tap;
             while (TouchPanel.IsGestureAvailable)
             {
                 GestureSample gesture = TouchPanel.ReadGesture();
@@ -39,7 +40,7 @@ namespace EmergencyExit
                         && gesture.Position.Y >= position.Y && gesture.Position.Y <= GameRoot.ScreenSize.Y - 30)
                     {
 
-                        actionTrue = true;
+                        actionjumpTrue = true;
                     }
 
 

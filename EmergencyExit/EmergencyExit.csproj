@@ -55,20 +55,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="About.cs" />
     <Compile Include="Activity1.cs" />
     <Compile Include="Art.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="ButtonManager.cs" />
-    <Compile Include="Camera.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityManager.cs" />
     <Compile Include="Fire.cs" />
     <Compile Include="Floor.cs" />
+    <Compile Include="GameOver.cs" />
     <Compile Include="GameRoot.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="jumpButton.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="Obstacle.cs" />
+    <Compile Include="ObstacleManager.cs" />
     <Compile Include="PauseMenu.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -95,6 +97,11 @@
     <AndroidAsset Include="Assets\Content\AboutButton.xnb" />
     <AndroidAsset Include="Assets\Content\QuitButton.xnb" />
     <AndroidAsset Include="Assets\Content\PauseMenu.xnb" />
+    <AndroidAsset Include="Assets\Content\About.xnb" />
+    <AndroidAsset Include="Assets\Content\ExitLayer2.xnb" />
+    <AndroidAsset Include="Assets\Content\PlayerAnim2.xnb" />
+    <AndroidAsset Include="Assets\Content\GameOverButton.xnb" />
+    <AndroidAsset Include="Assets\Content\GameOver.xnb" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>

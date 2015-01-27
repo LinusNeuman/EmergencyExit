@@ -20,18 +20,19 @@ namespace EmergencyExit
         public Texture2D texture;
         public Vector2 position;
 
-        public bool actionTrue;
+        public bool actionpauseTrue;
 
 
-        public pauseButton(Texture2D Texture, Vector2 Position)
+        public pauseButton()
         {
             TouchPanel.EnabledGestures = GestureType.Tap;
-            texture = Texture;
-            position = Position;
+            texture = Art.pauseButtonUp;
+            position = new Vector2(0 + 30, 0 + 30);
         }
 
         public void Update(GameTime gameTime)
         {
+            TouchPanel.EnabledGestures = GestureType.Tap;
             while (TouchPanel.IsGestureAvailable)
             {
                 GestureSample gesture = TouchPanel.ReadGesture();
@@ -41,7 +42,7 @@ namespace EmergencyExit
                 {
 
 
-                    actionTrue = true;
+                    actionpauseTrue = true;
 
                 }
 

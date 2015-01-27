@@ -43,7 +43,7 @@ namespace EmergencyExit
             Scale = new Vector2(1.2f, 1.2f);
 
             Position.X = GameRoot.ScreenSize.X / 4;
-            Position.Y = GameRoot.ScreenSize.Y - Art.Floor.Height -  Art.playerAnim.Height * Scale.Y - 87;
+            Position.Y = GameRoot.ScreenSize.Y - Art.Floor.Height - Art.playerAnim.Height * Scale.Y - 87;
 
             //frameSize = new Point(((int)(200 * Scale.X)), ((int)(223 * Scale.Y)));
             totalFrames = new Point(8, 1);
@@ -56,28 +56,33 @@ namespace EmergencyExit
 
         public Rectangle Hitbox()
         {
-            return new Rectangle((int)Position.X, (int)Position.Y, (int)(frameSize.X * (Scale.X)), (int)(frameSize.Y * Scale.Y));
+            return new Rectangle((int)Position.X, (int)Position.Y, (int)(frameSize.X), (int)(frameSize.Y));
         }
 
         public override void Update(GameTime gameTime)
         {
             btnMgr.Update(gameTime);
 
-            if(isJumping)
+            if (Hitbox().Intersects(Fire.Instance.Hitbox()))
+            {
+                GameRoot.gameState = GameRoot.GameState.GameOver;
+            }
+
+            if (isJumping)
             {
                 image = Art.playerAnimJump;
-                totalFrames = new Point(8,1);
+                totalFrames = new Point(8, 1);
                 frameSize = new Point(1, 1);
                 Scale = new Vector2(2.21f, 2.21f);
             }
-            if(isOnGround)
+            if (isOnGround)
             {
                 image = Art.playerAnim;
                 totalFrames = new Point(7, 1);
-                frameSize = new Point(200,223);
+                frameSize = new Point(200, 223);
                 Scale = new Vector2(1.2f, 1.2f);
             }
-            
+
             const float speed = 8;
 
             Position += Velocity;
@@ -85,13 +90,13 @@ namespace EmergencyExit
 
             //if (Hitbox().Intersects(
 
-            if(Velocity.Y < 10)
+            if (Velocity.Y < 10)
             {
                 Velocity.Y += 0.6f;
             }
 
             jumpTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (btnMgr.jumpButton.actionTrue == true && canJump == true)
+            if (btnMgr.jumpButton.actionjumpTrue == true && canJump == true)
             {
                 if (jumpTimer >= 1)
                 {
@@ -99,14 +104,13 @@ namespace EmergencyExit
                     jumpTimer = 0;
                 }
                 canJump = false;
-                btnMgr.jumpButton.actionTrue = false;
             }
 
 
             currentFrame.Y = 0;
             Fps = 12;
             timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if(timer >= frameLength)
+            if (timer >= frameLength)
             {
                 timer = 0f;
                 currentFrame.X = (currentFrame.X + 1) % totalFrames.X;
